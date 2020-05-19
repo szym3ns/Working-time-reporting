@@ -25,3 +25,14 @@ class ReportsViewSet(viewsets.ModelViewSet):
     queryset = Report.objects.all().order_by('-created')
     serializer_class = ReportSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+def getReportsByUserId(request, idd):
+    #try:
+    reports = Report.objects.filter(user=idd)
+    #except Report.DoesNotExist:
+        #return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    alist = {'id' : idd, 'reportsList' : reports}
+
+    return render(request, '../templates/reports.html', alist)

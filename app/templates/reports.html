@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Raport dla {{ id }}{% endblock %}
+
+{% block content %}
+<h1>Raporty czasu pracy dla pracownika o id {{ id }}</h1>
+
+{% for report in reportsList %}
+    <br>
+    <p>-----------------------------------------</p>
+    <p>Typ czynności: {{ report.type }}</p>
+    <p>Opis czynności: {{ report.description }}</p>
+    <p>Utworzono: {{ report.created }}</p>
+    <p>Czas: {{ report.time }} minut</p>
+    <p>Pracownik: {{ report.user }}</p>
+{% endfor %}
+
+{% endblock %}
