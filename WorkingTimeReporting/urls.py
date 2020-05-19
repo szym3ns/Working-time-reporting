@@ -21,6 +21,8 @@ from app import views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
+router.register(r'report_types', views.ReportTypesViewSet)
+router.register(r'reports', views.ReportsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
