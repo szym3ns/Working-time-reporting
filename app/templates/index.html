@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Raportowanie czasu{% endblock %}
+
+{% block content %}
+
+<div class="row text-center">
+
+    <div class="col-md-12">
+
+        <h1>Raportowanie czasu</h1>
+        <h2>Zalogowany pracownik o id {{ id }}</h2>
+
+        <form method="POST" class="post-form">{% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="save btn btn-default">Dodaj</button>
+        </form>
+        
+    </div>
+    
+</div>
+
+
+{% endblock %}

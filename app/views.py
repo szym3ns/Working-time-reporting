@@ -4,6 +4,9 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from app.serializers import UserSerializer, ReportTypeSerializer, ReportSerializer
 from app.models import ReportType, Report
+from app.forms import ReportTimeForm
+from django.shortcuts import redirect
+from django.utils import timezone
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -36,3 +39,18 @@ def getReportsByUserId(request, idd):
     alist = {'id' : idd, 'reportsList' : reports}
 
     return render(request, '../templates/reports.html', alist)
+
+
+def addReport(request):
+    if request.method == 'POST':
+        form = ReportTimeForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.created = timezone.now()
+            post.save()
+
+    else:
+        form = ReportTimeForm()
+
+    return render(request, 'index.html', {'form': form})
