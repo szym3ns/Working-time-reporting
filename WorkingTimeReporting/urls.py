@@ -24,6 +24,10 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'report_types', views.ReportTypesViewSet)
 router.register(r'reports', views.ReportsViewSet)
+router.register(r'projects', views.ProjectsViewSet)
+router.register(r'notifications', views.NotificationsViewSet)
+router.register(r'notification_statuses', views.NotificationStatusesViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),
