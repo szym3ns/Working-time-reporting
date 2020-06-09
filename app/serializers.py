@@ -32,6 +32,11 @@ class NotificationSerializer(serializers.HyperlinkedModelSerializer):
         model = Notification
         fields = ['created', 'author', 'description', 'status']
 
+    def to_representation(self, instance):
+        rep = super(NotificationSerializer, self).to_representation(instance)
+        rep['author'] = instance.author.id
+        return rep
+
 
 class NotificationStatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
