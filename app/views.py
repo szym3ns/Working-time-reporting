@@ -10,9 +10,6 @@ from django.utils import timezone
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -46,29 +43,3 @@ class NotificationStatusesViewSet(viewsets.ModelViewSet):
     queryset = NotificationStatus.objects.all().order_by('-name')
     serializer_class = NotificationStatusSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-
-def getReportsByUserId(request, idd):
-    #try:
-    reports = Report.objects.filter(user=idd)
-    #except Report.DoesNotExist:
-        #return Response(status=status.HTTP_404_NOT_FOUND)
-    
-    alist = {'id' : idd, 'reportsList' : reports}
-
-    return render(request, '../templates/reports.html', alist)
-
-
-def addReport(request):
-    if request.method == 'POST':
-        form = ReportTimeForm(request.POST)
-
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.created = timezone.now()
-            post.save()
-
-    else:
-        form = ReportTimeForm()
-
-    return render(request, 'index.html', {'form': form})
