@@ -43,6 +43,17 @@ class NotificationStatusesViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET'])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+
+    serializer_context = {
+        'request': request,
+    }
+    serializer = UserSerializer(user, context=serializer_context)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def getNotificationByUserId(request, pk):
     notification = Notification.objects.filter(author=pk)
 
