@@ -51,3 +51,19 @@ def getNotificationByUserId(request, pk):
     }
     serializer = NotificationSerializer(notification, many=True, context=serializer_context)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getNotificationByDate(request, year, month, day, hour, minute, second):
+    notification = Notification.objects.filter( created__year=year, 
+                                                created__month=month, 
+                                                created__day=day, 
+                                                created__hour=hour, 
+                                                created__minute=minute, 
+                                                created__second=second)
+
+    serializer_context = {
+        'request': request,
+    }
+    serializer = NotificationSerializer(notification, many=True, context=serializer_context)
+    return Response(serializer.data)
