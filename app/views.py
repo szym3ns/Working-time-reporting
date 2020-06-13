@@ -7,6 +7,9 @@ from app.models import ReportType, Report, Project, NotificationStatus, Notifica
 from app.forms import ReportTimeForm
 from django.shortcuts import redirect
 from django.utils import timezone
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,3 +40,14 @@ class NotificationsViewSet(viewsets.ModelViewSet):
 class NotificationStatusesViewSet(viewsets.ModelViewSet):
     queryset = NotificationStatus.objects.all().order_by('-name')
     serializer_class = NotificationStatusSerializer
+
+
+@api_view(['GET'])
+def getNotificationByUserId(request, pk):
+    notification = Notification.objects.filter(author=pk)
+
+    serializer_context = {
+        'request': request,
+    }
+    serializer = NotificationSerializer(notification, many=True, context=serializer_context)
+    return Response(serializer.data)
