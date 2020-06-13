@@ -6,7 +6,7 @@ from app.models import ReportType, Report, Notification, NotificationStatus, Pro
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
+        fields = ['url', 'username', 'password', 'email', 'groups']
 
 
 class ReportTypeSerializer(serializers.HyperlinkedModelSerializer):
