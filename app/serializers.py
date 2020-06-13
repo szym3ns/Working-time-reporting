@@ -30,7 +30,7 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
 class NotificationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Notification
-        fields = ['created', 'author', 'description', 'status']
+        fields = ['id', 'created', 'author', 'description', 'status']
 
     def to_representation(self, instance):
         rep = super(NotificationSerializer, self).to_representation(instance)
