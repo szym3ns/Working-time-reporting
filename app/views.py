@@ -82,3 +82,19 @@ def getReportByDate(request, year, month, day, hour, minute, second):
     }
     serializer = ReportSerializer(report, many=True, context=serializer_context)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getDailySummaryByData(request, year, month, day, hour, minute, second):
+    summary = DailySummary.objects.filter( created__year=year, 
+                                                created__month=month, 
+                                                created__day=day, 
+                                                created__hour=hour, 
+                                                created__minute=minute, 
+                                                created__second=second)
+
+    serializer_context = {
+        'request': request,
+    }
+    serializer = DailySummarySerializer(summary, many=True, context=serializer_context)
+    return Response(serializer.data)
