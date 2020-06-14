@@ -54,19 +54,19 @@ def getUserById(request, pk):
 
 
 @api_view(['GET'])
-def getNotificationByUserId(request, pk):
-    notification = Notification.objects.filter(author=pk)
+def getReportByUserId(request, pk):
+    report = Report.objects.filter(user=pk)
 
     serializer_context = {
         'request': request,
     }
-    serializer = NotificationSerializer(notification, many=True, context=serializer_context)
+    serializer = ReportSerializer(report, many=True, context=serializer_context)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getNotificationByDate(request, year, month, day, hour, minute, second):
-    notification = Notification.objects.filter( created__year=year, 
+def getReportByDate(request, year, month, day, hour, minute, second):
+    report = Report.objects.filter( created__year=year, 
                                                 created__month=month, 
                                                 created__day=day, 
                                                 created__hour=hour, 
@@ -76,5 +76,5 @@ def getNotificationByDate(request, year, month, day, hour, minute, second):
     serializer_context = {
         'request': request,
     }
-    serializer = NotificationSerializer(notification, many=True, context=serializer_context)
+    serializer = ReportSerializer(report, many=True, context=serializer_context)
     return Response(serializer.data)

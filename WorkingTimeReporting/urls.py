@@ -36,6 +36,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('auth-token/', authviews.obtain_auth_token, name='auth-token'),
     path('users/<int:pk>', views.getUserById),
-    path('notifications/user/<int:pk>', views.getNotificationByUserId),
-    path('notifications/date/<int:year>-<int:month>-<int:day>T<int:hour>:<int:minute>:<int:second>', views.getNotificationByDate),
+    path('reports/user/<int:pk>', views.getReportByUserId),
+    path('reports/date/<int:year>-<int:month>-<int:day>T<int:hour>:<int:minute>:<int:second>', views.getReportByDate),
 ]
