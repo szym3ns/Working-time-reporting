@@ -63,3 +63,15 @@ class DailySummarySerializer(serializers.HyperlinkedModelSerializer):
         summary['employee'] = instance.employee.id
         
         return summary
+
+
+class MonthlySummarySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = MonthlySummary
+        fields = ['created', 'employee', 'reports']
+
+    def to_representation(self, instance):
+        summary = super(MonthlySummarySerializer, self).to_representation(instance)
+        summary['employee'] = instance.employee.id
+        
+        return summary

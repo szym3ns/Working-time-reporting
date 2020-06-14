@@ -46,6 +46,11 @@ class DailySummaryViewSet(viewsets.ModelViewSet):
     serializer_class = DailySummarySerializer
 
 
+class MonthlySummaryViewSet(viewsets.ModelViewSet):
+    queryset = MonthlySummary.objects.all()
+    serializer_class = MonthlySummarySerializer
+
+
 @api_view(['GET'])
 def getUserById(request, pk):
     user = User.objects.get(id=pk)
@@ -97,6 +102,22 @@ def getDailySummaryByData(request, year, month, day, hour, minute, second):
         'request': request,
     }
     serializer = DailySummarySerializer(summary, many=True, context=serializer_context)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getMonthlySummaryByData(request, year, month, day, hour, minute, second):
+    summary = MonthlySummary.objects.filter( created__year=year, 
+                                                created__month=month, 
+                                                created__day=day, 
+                                                created__hour=hour, 
+                                                created__minute=minute, 
+                                                created__second=second)
+
+    serializer_context = {
+        'request': request,
+    }
+    serializer = MonthlySummarySerializer(summary, many=True, context=serializer_context)
     return Response(serializer.data)
 
 

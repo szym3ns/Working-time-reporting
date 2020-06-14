@@ -30,6 +30,7 @@ router.register(r'notifications', views.NotificationsViewSet)
 router.register(r'notification_statuses', views.NotificationStatusesViewSet)
 router.register(r'notification_statuses', views.NotificationStatusesViewSet)
 router.register(r'daily_summary', views.DailySummaryViewSet)
+router.register(r'monthly_summary', views.MonthlySummaryViewSet)
 
 
 urlpatterns = [
@@ -42,4 +43,5 @@ urlpatterns = [
     path('reports/user/<int:pk>', views.getReportByUserId),
     path('reports/date/<int:year>-<int:month>-<int:day>T<int:hour>:<int:minute>:<int:second>', views.getReportByDate),
     path('daily_summary/date/<int:year>-<int:month>-<int:day>T<int:hour>:<int:minute>:<int:second>', views.getDailySummaryByData),
+    path('monthly_summary/date/<int:year>-<int:month>-<int:day>T<int:hour>:<int:minute>:<int:second>', views.getMonthlySummaryByData),
 ]
