@@ -6,7 +6,7 @@ from app.models import *
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'password', 'email', 'groups']
+        fields = ['id', 'username', 'password', 'email', 'groups']
 
 
 class ReportTypeSerializer(serializers.HyperlinkedModelSerializer):
