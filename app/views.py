@@ -98,3 +98,14 @@ def getDailySummaryByData(request, year, month, day, hour, minute, second):
     }
     serializer = DailySummarySerializer(summary, many=True, context=serializer_context)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getUserByUsername(request, username):
+    user = User.objects.filter(username=username)
+
+    serializer_context = {
+        'request': request,
+    }
+    serializer = UserSerializer(user, many=True, context=serializer_context)
+    return Response(serializer.data)
