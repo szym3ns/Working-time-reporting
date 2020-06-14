@@ -28,6 +28,8 @@ router.register(r'reports', views.ReportsViewSet)
 router.register(r'projects', views.ProjectsViewSet)
 router.register(r'notifications', views.NotificationsViewSet)
 router.register(r'notification_statuses', views.NotificationStatusesViewSet)
+router.register(r'notification_statuses', views.NotificationStatusesViewSet)
+router.register(r'daily_summary', views.DailySummaryViewSet)
 
 
 urlpatterns = [

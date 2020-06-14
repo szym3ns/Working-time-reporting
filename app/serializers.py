@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from app.models import ReportType, Report, Notification, NotificationStatus, Project
+from app.models import *
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -51,3 +51,15 @@ class NotificationStatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = NotificationStatus
         fields = ['name']
+
+
+class DailySummarySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = DailySummary
+        fields = ['created', 'employee', 'reports']
+
+    def to_representation(self, instance):
+        summary = super(DailySummarySerializer, self).to_representation(instance)
+        summary['employee'] = instance.user.id
+        
+        return summary

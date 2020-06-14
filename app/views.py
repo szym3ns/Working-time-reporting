@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from app.serializers import UserSerializer, ReportTypeSerializer, ReportSerializer, ProjectSerializer, NotificationStatusSerializer, NotificationSerializer
-from app.models import ReportType, Report, Project, NotificationStatus, Notification
-from app.forms import ReportTimeForm
+from app.serializers import *
+from app.models import *
 from django.shortcuts import redirect
 from django.utils import timezone
 from rest_framework.response import Response
@@ -40,6 +39,11 @@ class NotificationsViewSet(viewsets.ModelViewSet):
 class NotificationStatusesViewSet(viewsets.ModelViewSet):
     queryset = NotificationStatus.objects.all().order_by('-name')
     serializer_class = NotificationStatusSerializer
+
+
+class DailySummaryViewSet(viewsets.ModelViewSet):
+    queryset = DailySummary.objects.all()
+    serializer_class = DailySummarySerializer
 
 
 @api_view(['GET'])
