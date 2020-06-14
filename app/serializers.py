@@ -18,7 +18,15 @@ class ReportTypeSerializer(serializers.HyperlinkedModelSerializer):
 class ReportSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Report
-        fields = ['type', 'description', 'created', 'time', 'user']
+        fields = ['type', 'description', 'created', 'time', 'user', 'project']
+
+    def to_representation(self, instance):
+        report = super(ReportSerializer, self).to_representation(instance)
+        report['user'] = instance.user.id
+        report['project'] = instance.project.name
+        report['type'] = instance.type.name
+
+        return report
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
@@ -33,9 +41,10 @@ class NotificationSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'created', 'author', 'description', 'status']
 
     def to_representation(self, instance):
-        rep = super(NotificationSerializer, self).to_representation(instance)
-        rep['author'] = instance.author.id
-        return rep
+        notification = super(NotificationSerializer, self).to_representation(instance)
+        notification['author'] = instance.author.id
+        
+        return notification
 
 
 class NotificationStatusSerializer(serializers.HyperlinkedModelSerializer):
