@@ -45,3 +45,17 @@ class Notification(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(max_length=200)
     status = models.ForeignKey(NotificationStatus, on_delete=models.CASCADE)
+
+
+class DailySummary(models.Model):
+    id = models.IntegerField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    reports = models.ManyToManyField(Report)
+
+
+class MonthlySummary(models.Model):
+    id = models.IntegerField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    reports = models.ManyToManyField(Report)
