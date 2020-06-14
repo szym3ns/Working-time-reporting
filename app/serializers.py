@@ -60,6 +60,6 @@ class DailySummarySerializer(serializers.HyperlinkedModelSerializer):
 
     def to_representation(self, instance):
         summary = super(DailySummarySerializer, self).to_representation(instance)
-        summary['employee'] = instance.user.id
+        summary['employee'] = instance.employee.id
         
         return summary
